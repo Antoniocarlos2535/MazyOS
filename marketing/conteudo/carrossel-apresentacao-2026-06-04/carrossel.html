@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrossel — Conecta Negócios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #111; }
+
+    .slide {
+      width: 1080px;
+      height: 1350px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 80px;
+    }
+
+    .dark   { background: #0D1B2A; color: #FFFFFF; }
+    .light  { background: #FFFFFF; color: #2D2D2D; }
+    .accent { background: #1A73E8; color: #FFFFFF; }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 0;
+    }
+    .logo-text {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .dark   .logo-text { color: rgba(255,255,255,0.85); }
+    .light  .logo-text { color: #0D1B2A; }
+    .accent .logo-text { color: rgba(255,255,255,0.85); }
+
+    .counter {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+    }
+    .dark   .counter { color: rgba(255,255,255,0.35); }
+    .light  .counter { color: rgba(0,0,0,0.25); }
+    .accent .counter { color: rgba(255,255,255,0.45); }
+
+    /* Content */
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Eyebrow */
+    .eyebrow {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .dark   .eyebrow { color: #1A73E8; }
+    .light  .eyebrow { color: #1A73E8; }
+    .accent .eyebrow { color: rgba(255,255,255,0.65); }
+
+    /* Régua */
+    .rule {
+      width: 60px;
+      height: 3px;
+      margin-bottom: 28px;
+    }
+    .dark   .rule { background: #1A73E8; }
+    .light  .rule { background: #1A73E8; }
+    .accent .rule { background: rgba(255,255,255,0.5); }
+
+    /* Títulos */
+    .h1 {
+      font-size: 96px;
+      font-weight: 900;
+      line-height: 0.97;
+      letter-spacing: -0.04em;
+      margin-bottom: 36px;
+    }
+    .h2 {
+      font-size: 66px;
+      font-weight: 800;
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+      margin-bottom: 28px;
+    }
+
+    /* Corpo */
+    .body {
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 1.65;
+    }
+    .dark   .body { color: rgba(255,255,255,0.68); }
+    .light  .body { color: #555; }
+    .accent .body { color: rgba(255,255,255,0.82); }
+
+    /* Subtítulo capa */
+    .subtitle {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+    .dark .subtitle { color: rgba(255,255,255,0.60); }
+
+    /* Footer */
+    .footer {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-end;
+      padding-top: 28px;
+      margin-top: 24px;
+    }
+    .dark   .footer { border-top: 1px solid rgba(255,255,255,0.1); }
+    .light  .footer { border-top: 1px solid rgba(0,0,0,0.07); }
+    .accent .footer { border-top: 1px solid rgba(255,255,255,0.18); }
+
+    .handle {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+    .dark   .handle { color: rgba(255,255,255,0.38); }
+    .light  .handle { color: rgba(0,0,0,0.28); }
+    .accent .handle { color: rgba(255,255,255,0.6); }
+
+    /* Slide 2 — número */
+    .number-highlight {
+      font-size: 200px;
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -0.05em;
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+
+    /* Slide 5 — items */
+    .items {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      margin-top: 4px;
+    }
+    .item {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1.45;
+      color: #333;
+    }
+    .arrow {
+      color: #1A73E8;
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-weight: 700;
+    }
+
+    /* Slide 6 — CTA */
+    .cta-center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 20px;
+    }
+    .cta-brand {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+    .cta-h1 {
+      font-size: 84px;
+      font-weight: 900;
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      color: #FFFFFF;
+      text-align: center;
+    }
+    .cta-sub {
+      font-size: 21px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.55;
+      max-width: 680px;
+    }
+    .cta-btn {
+      border: 2px solid rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.12);
+      color: #FFFFFF;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 20px 56px;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- SLIDE 1 — CAPA -->
+<div class="slide dark" id="slide-01">
+  <div class="header">
+    <span class="logo-text">Conecta Negócios</span>
+    <span class="counter">01 / 06</span>
+  </div>
+  <div class="content" style="justify-content: flex-end; padding-bottom: 32px;">
+    <span class="eyebrow">Marketing Digital Local</span>
+    <div class="rule"></div>
+    <h1 class="h1">Mais clientes<br>para o seu<br>negócio.</h1>
+    <p class="subtitle" style="max-width: 620px;">Marketing e gestão de tráfego<br>para pequenas e médias empresas.</p>
+  </div>
+  <div class="footer">
+    <span class="handle">@conectanegocios</span>
+  </div>
+</div>
+
+<!-- SLIDE 2 — NÚMERO -->
+<div class="slide accent" id="slide-02">
+  <div class="header">
+    <span class="logo-text">Conecta Negócios</span>
+    <span class="counter">02 / 06</span>
+  </div>
+  <div class="content">
+    <span class="eyebrow">A Realidade</span>
+    <div class="number-highlight">73%</div>
+    <div class="rule" style="background: rgba(255,255,255,0.45);"></div>
+    <h2 class="h2" style="font-size: 52px; margin-bottom: 24px;">dos consumidores pesquisam<br>no digital antes de comprar</h2>
+    <p class="body">Se o seu negócio não aparece,<br>esse cliente vai direto pro concorrente.</p>
+  </div>
+  <div class="footer">
+    <span class="handle">@conectanegocios</span>
+  </div>
+</div>
+
+<!-- SLIDE 3 — PROBLEMA -->
+<div class="slide light" id="slide-03">
+  <div class="header">
+    <span class="logo-text">Conecta Negócios</span>
+    <span class="counter">03 / 06</span>
+  </div>
+  <div class="content">
+    <span class="eyebrow">O Problema</span>
+    <div class="rule"></div>
+    <h2 class="h2" style="color: #0D1B2A;">Bom serviço<br>não é<br>suficiente.</h2>
+    <p class="body" style="max-width: 740px;">Você atende bem, entrega qualidade, cuida do cliente. Mas quem está buscando o que você vende não consegue te encontrar.</p>
+  </div>
+  <div class="footer">
+    <span class="handle">@conectanegocios</span>
+  </div>
+</div>
+
+<!-- SLIDE 4 — SOLUÇÃO -->
+<div class="slide dark" id="slide-04">
+  <div class="header">
+    <span class="logo-text">Conecta Negócios</span>
+    <span class="counter">04 / 06</span>
+  </div>
+  <div class="content">
+    <span class="eyebrow">A Solução</span>
+    <div class="rule"></div>
+    <h2 class="h2">Seu negócio na frente de quem está procurando.</h2>
+    <p class="body" style="max-width: 820px;">Com anúncios bem direcionados no Facebook e Instagram, seu negócio aparece exatamente para quem tem interesse — na hora certa.</p>
+  </div>
+  <div class="footer">
+    <span class="handle">@conectanegocios</span>
+  </div>
+</div>
+
+<!-- SLIDE 5 — COMO FUNCIONA -->
+<div class="slide light" id="slide-05">
+  <div class="header">
+    <span class="logo-text">Conecta Negócios</span>
+    <span class="counter">05 / 06</span>
+  </div>
+  <div class="content">
+    <span class="eyebrow">Como Trabalhamos</span>
+    <div class="rule"></div>
+    <h2 class="h2" style="color: #0D1B2A; font-size: 60px; margin-bottom: 36px;">Direto,<br>sem enrolação.</h2>
+    <div class="items">
+      <div class="item"><span class="arrow">→</span><span>Entendemos o seu negócio antes de qualquer coisa</span></div>
+      <div class="item"><span class="arrow">→</span><span>Criamos campanhas pensadas para o seu público</span></div>
+      <div class="item"><span class="arrow">→</span><span>Acompanhamos e otimizamos todo mês</span></div>
+      <div class="item"><span class="arrow">→</span><span>Você foca no trabalho, a gente cuida de trazer cliente</span></div>
+    </div>
+  </div>
+  <div class="footer">
+    <span class="handle">@conectanegocios</span>
+  </div>
+</div>
+
+<!-- SLIDE 6 — CTA FINAL -->
+<div class="slide accent" id="slide-06">
+  <div class="header">
+    <span class="logo-text">Conecta Negócios</span>
+    <span class="counter">06 / 06</span>
+  </div>
+  <div class="cta-center">
+    <p class="cta-brand">Conecta Negócios</p>
+    <h1 class="cta-h1">Pronto para<br>aparecer mais?</h1>
+    <p class="cta-sub">Atendemos em Santarém, Mojuí, Belterra<br>e em todo o Brasil.</p>
+    <button class="cta-btn">Fala com a gente</button>
+  </div>
+  <div class="footer">
+    <span class="handle">@conectanegocios</span>
+  </div>
+</div>
+
+</body>
+</html>
